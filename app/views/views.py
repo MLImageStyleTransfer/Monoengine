@@ -19,7 +19,7 @@ def user_auth_view() -> Response:
 
 
 @router.get("/user/{login}", status_code=200)
-def user_view(login: str):
+def user_view(login: str) -> Response:
     return Response(f"<h1> Login: {login} </h1>")
 
 
