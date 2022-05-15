@@ -1,0 +1,9 @@
+services:
+  postgres:
+    image: def_img_postgre_db
+    environment:
+      POSTGRES_DB: "default_style_image_db"
+      POSTGRES_USER: "user"
+      POSTGRES_PASSWORD: "1234"
+    ports:
+      - "5432:5432"

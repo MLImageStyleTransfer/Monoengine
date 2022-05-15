@@ -1,6 +1,17 @@
-from fastapi import APIRouter, Response
+from fastapi import APIRouter, Response, Depends
+
+from ..database.database import SessionLocal, engine
+from ..database.models import DefaultStyleImage
 
 router = APIRouter()
+
+
+def get_database():
+    database = SessionLocal()
+    try:
+        yield database
+    finally:
+        database.close()
 
 
 @router.get("/", status_code=200)
@@ -24,5 +35,7 @@ def user_view(login: str) -> Response:
 
 
 @router.get("/default_style_img", status_code=200)
-def default_style_img() -> list[str]:
-    return ["a", "b", "c"]
+def default_style_img(db: SessionLocal = Depends(get_database)) -> list[str]:
+    db_data: list[DefaultStyleImage] = db.query(DefaultStyleImage).all()
+    default_style_img_codes: list[str] = [elem.img_code for elem in db_data]
+    return default_style_img_codes
