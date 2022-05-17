@@ -1,12 +1,11 @@
 # Monoengine
-### Setup and run: monoengine
+### Setup and run:
 ```
-pip install -r requirements.txt
-python3 runner.py
+sudo chmod +x run.sh
+./run.sh
 ```
-### Setup and run: default style image database
+Stopping docker with database:
 ```
-cd /app/database
-sudo docker-compose up
+cd ./app/database
+sudo docker-compose down
 ```
-
